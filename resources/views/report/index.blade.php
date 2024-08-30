@@ -1,11 +1,11 @@
 @extends('dashboard.index')
-@section('conten') 
+@section('conten')
 
 
 
     <div class="row mt-3 mb-3">
         <div class="col-lg-12 margin-tb">
-          
+
             <div class="float-left">
                 <a class="btn btn-success" href="{{ route('posts.create') }}"> Tambah Barang</a>
             </div>
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div> --}}
-    
+
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
@@ -42,11 +42,11 @@
         @foreach ($report_barangs as $rpt)
         <tr>
             {{-- <td class="text-center">{{ ++$i }}</td> --}}
-            <td>{{ $rpt->nama_pengambil }}</td>
-            <td>{{ $rpt->barang_id }}</td>
-            <td>{{ $rpt->keperluan }}</td>
-            <td>{{ $rpt->jumlah }}</td>
-            <td>{{ $rpt->created_at }}</td>
+            <td>{{ $rpt?->nama_pengambil }}</td>
+            <td>{{ $rpt?->barang?->nama_barang }}</td>
+            <td>{{ $rpt?->keperluan }}</td>
+            <td>{{ $rpt?->jumlah }}</td>
+            <td>{{ $rpt?->created_at }}</td>
             <td class="text-center">
                 <form action="{{ route('posts.destroy',$rpt->id) }}" method="POST">
 
