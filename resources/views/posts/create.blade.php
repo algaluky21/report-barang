@@ -7,7 +7,7 @@
             <h2>Create New Post</h2>
         </div>
         <div class="float-right">
-            <a class="btn btn-secondary" href="{{ route('posts.index') }}"> Back</a>
+            <a class="btn btn-secondary" href="{{ route('barang.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
     </div>
 @endif
 
-<form action="{{ route('posts.store') }}" method="POST">
+<form action="{{ route('barang.store') }}" method="POST">
     @csrf
 
      <div class="row">
@@ -47,7 +47,7 @@
                 <input type="text" name="stok" class="form-control" placeholder="Stok">
             </div>
         </div>
-        
+
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

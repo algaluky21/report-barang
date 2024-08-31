@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use SebastianBergmann\CodeCoverage\Report\Xml\Report;
+// use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
 class ReportBarang extends Model
 {
@@ -12,6 +12,6 @@ class ReportBarang extends Model
 
     public function barang()
     {
-        return $this->belongsTo(Report::class, 'barang_id', 'id');
+        return $this->belongsTo(Barang::class, 'barang_id', 'id');
     }
 }

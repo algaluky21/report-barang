@@ -1,13 +1,13 @@
 @extends('dashboard.index')
-@section('conten') 
+@section('conten')
 
 
 
     <div class="row mt-3 mb-3">
         <div class="col-lg-12 margin-tb">
-          
+
             <div class="float-left">
-                <a class="btn btn-success" href="{{ route('posts.create') }}"> Tambah Barang</a>
+                <a class="btn btn-success" href="{{ route('barang.create') }}"> Tambah Barang</a>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div> --}}
-    
+
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
@@ -48,11 +48,11 @@
             <td>{{ $post->created_at }}</td>
             <td>{{ $post->updated_at }}</td>
             <td class="text-center">
-                <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
+                <form action="{{ route('barang.destroy',$post->id) }}" method="POST">
 
-                   <!-- <a class="btn btn-info btn-sm" href="{{ route('posts.show',$post->id) }}">Show</a> -->
+                   <!-- <a class="btn btn-info btn-sm" href="{{ route('barang.show',$post->id) }}">Show</a> -->
 
-                    <a class="btn btn-primary btn-sm" href="{{ route('posts.edit',$post->id) }}">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('barang.edit',$post->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

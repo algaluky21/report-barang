@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
@@ -9,7 +9,8 @@ use App\Http\Controllers\PlcController;
 use App\Http\Controllers\UmumController;
 use App\Http\Controllers\ReportBarangController;
 
-Route::resource('posts', PostController::class);
+// Route::resource('posts', PostController::class);
+Route::resource('barang', BarangController::class);
 
 Route::resource('plcs', PlcController::class);
 

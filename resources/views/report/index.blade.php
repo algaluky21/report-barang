@@ -7,7 +7,7 @@
         <div class="col-lg-12 margin-tb">
 
             <div class="float-left">
-                <a class="btn btn-success" href="{{ route('posts.create') }}"> Tambah Barang</a>
+                <a class="btn btn-success" href="{{ route('reports.create') }}"> Tambah Barang</a>
             </div>
         </div>
     </div>
@@ -48,11 +48,11 @@
             <td>{{ $rpt?->jumlah }}</td>
             <td>{{ $rpt?->created_at }}</td>
             <td class="text-center">
-                <form action="{{ route('posts.destroy',$rpt->id) }}" method="POST">
+                <form action="{{ route('barang.destroy',$rpt->id) }}" method="POST">
 
-                   <!-- <a class="btn btn-info btn-sm" href="{{ route('posts.show',$rpt->id) }}">Show</a> -->
+                   <!-- <a class="btn btn-info btn-sm" href="{{ route('barang.show',$rpt->id) }}">Show</a> -->
 
-                    <a class="btn btn-primary btn-sm" href="{{ route('posts.edit',$rpt->id) }}">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('barang.edit',$rpt->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')
