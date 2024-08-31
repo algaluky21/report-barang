@@ -10,7 +10,7 @@ class ReportBarang extends Model
 {
     use HasFactory;
 
-    public function report()
+    public function barang()
     {
         return $this->belongsTo(Report::class, 'barang_id', 'id');
     }

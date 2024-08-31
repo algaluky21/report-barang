@@ -11,7 +11,7 @@ class PostController extends Controller
     {
         $posts = Post::latest()->paginate(3);
 
-      
+
         return view('posts.index',[
         'return' =>'Post',
         'active' => 'post'
