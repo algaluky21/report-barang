@@ -22,7 +22,7 @@
             </div>
         </div>
     </div> --}}
-    
+
     <div class="row mt-2 mb-3">
       <div class="float-left">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -30,8 +30,8 @@
         </button>
       </div>
   </div>
-  
-      
+
+
       <!-- Modal -->
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -41,7 +41,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              
+
                 <form action="{{ route('barang.store') }}" method="POST">
                     @csrf
                     <div class="card-body">
@@ -57,22 +57,22 @@
                         <label for="">Stok</label>
                         <input type="text" class="form-control" id="" name="stok" placeholder="">
                       </div>
-                     
-                      
+
+
                     </div>
                     <!-- /.card-body -->
-    
+
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                   </form>
             </div>
-            
+
           </div>
         </div>
       </div>
 
-   
+
 
 
 <!-- Modal Edit -->
@@ -120,8 +120,8 @@
         @endforeach
     </table>
 
-    
-    
+
+
 
     {!! $barang->links() !!}
 

@@ -8,16 +8,16 @@
           </button>
         </div>
         <div class="modal-body">
-          
+
             <form action="{{ route('reports.store') }}" method="POST">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
                     <label for="">Nama Barang</label>
-                    <select name=" " type="" class="form-control">
+                    <select name="barang_id" type="" class="form-control">
                       <option value="Pilih"></option>
-                      {{-- @foreach($barangs as $brg)
-                      <option value="{{ $brg->id }}">{{ $brg->$nama_barang }}</option> 
+                      @foreach($barangs as $brg)
+                        <option value="{{ $brg->id }}">{{ $brg->nama_barang }}</option>
                       @endforeach
                     </select>
                   </div>
@@ -32,10 +32,10 @@
                   <div class="form-group">
                       <label for="">Jumlah</label>
                       <input type="text" class="form-control" id="" name="jumlah" placeholder="">
-                  </div> --}}
-                  
-                 
-                  
+                  </div>
+
+
+
                 </div>
                 <!-- /.card-body -->
 
@@ -44,7 +44,7 @@
                 </div>
               </form>
         </div>
-        
+
       </div>
     </div>
   </div>

@@ -10,11 +10,11 @@
       </button>
     </div>
 </div>
-{{-- @include('report.create') --}}
+@include('report.create')
 
-    
+
     <!-- Modal -->
-    
+
 
     {{-- <div class="row justify-content-center">
         <div class="col-md-6">
@@ -27,7 +27,7 @@
         </div>
     </div> --}}
 
-    
+
 
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
@@ -55,7 +55,7 @@
             <td>{{ $rpt?->created_at }}</td>
             <td class="text-center">
                 <form action="{{ route('barang.destroy',$rpt->id) }}" method="POST">
-{{-- 
+{{--
                     <a class="btn btn-info btn-sm" href="{{ route('report.show') }}">Show</a>  --}}
 
                     <a class="btn btn-primary btn-sm" href="{{ route('barang.edit',$rpt->id) }}">Edit</a>
