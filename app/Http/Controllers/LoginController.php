@@ -27,7 +27,7 @@ class LoginController extends Controller
         ]);
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended('/posts');
+            return redirect()->intended('/barang');
         }
     
 
@@ -44,7 +44,7 @@ class LoginController extends Controller
 
         request()->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/umums');
     }
    
 

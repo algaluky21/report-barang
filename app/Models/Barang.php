@@ -11,6 +11,10 @@ class Barang extends Model
 
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'nama_barang', 'jenis_barang', 'stok'
+    ];
+
     public function reportBarangs()
     {
         return $this->hasMany(ReportBarang::class, 'barang_id', 'id');

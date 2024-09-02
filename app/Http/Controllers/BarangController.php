@@ -13,13 +13,13 @@ class BarangController extends Controller
     public function index()
     {
         //
-        $posts = Barang::latest()->paginate(3);
+        $barang = Barang::latest()->paginate(5);
 
-        $active = 'post';
+        $active = 'barang';
             return view('posts.index',[
             'return' => 'Post',
             'active' => 'post'
-            ],compact('posts', 'active'))->with('i', (request()->input('page', 1) - 1) * 5);
+            ],compact('barang', 'active'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -73,14 +73,29 @@ class BarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     {
-        //
+        $request->validate([
+            'nama_barang' => 'required',
+            'jenis_barang' => 'required',
+            'stok' => 'required',
+            
+        ]);
+
+        $barang->update($request->all());
+
+        return redirect()->route('barang.index')
+                        ->with('success','Post updated successfully');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Barang $barang)
     {
-        //
+        $barang->delete();
+
+        return redirect()->route('barang.index')
+                        ->with('success','Post deleted successfully');
     }
 }

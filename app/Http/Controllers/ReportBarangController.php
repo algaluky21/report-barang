@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReportBarang;
+use App\Models\Barang;
 use Illuminate\Http\Request;
 
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,7 @@ class ReportBarangController extends Controller
      */
     public function index()
     {
+       
         $report_barangs = ReportBarang::latest()->paginate(5);
 
       
@@ -25,12 +27,7 @@ class ReportBarangController extends Controller
         'active' => 'post'
         ],compact('report_barangs'))->with('i', (request()->input('page', 1) - 1) * 5);
 
-        // return view('report/index',compact('report_barangs'));
-
-        // return view('report.index',[
-        // 'return' =>'Post',
-        // 'active' => 'post'
-        // ],compact('report_barangs'));
+       
     }
 
     /**
@@ -40,7 +37,10 @@ class ReportBarangController extends Controller
      */
     public function create()
     {
-        //
+        //$barangs = Barang::all();
+       // return view('report.index', compact('barangs'));
+
+        
     }
 
     /**
@@ -51,7 +51,17 @@ class ReportBarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'barang_id' => 'required',
+            'nama_pengambil' => 'required',
+            'keperluan' => 'required',
+            'jumlah' => 'required',
+        ]);
+
+        ReportBarang::create($request->all());
+
+        return redirect()->route('report.index')
+                        ->with('success','Post created successfully.');
     }
 
     /**

@@ -12,9 +12,9 @@ class PlcController extends Controller
         $plcs = Plc::latest()->paginate(20);
 
         return view('plc.index',[
-            'return' =>'Plcv',
-            'active' => 'plc'],compact('plcs'))
-            ->with('i', (request()->input('page', 1) - 1) * 20);
+            'return' =>'Plc',
+            'active' => 'plc'
+            ],compact('plcs'))->with('i', (request()->input('page', 1) - 1) * 20);
     }
 
     
