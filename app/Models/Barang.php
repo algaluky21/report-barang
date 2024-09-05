@@ -15,6 +15,8 @@ class Barang extends Model
         'nama_barang', 'jenis_barang', 'stok'
     ];
 
+    public $timestamps = true;
+
     public function reportBarangs()
     {
         return $this->hasMany(ReportBarang::class, 'barang_id', 'id');

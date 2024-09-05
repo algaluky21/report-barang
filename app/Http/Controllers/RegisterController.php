@@ -13,7 +13,8 @@ class RegisterController extends Controller
     {
         return view('register.index',[
         'return' =>'Register',
-        'active' => 'register'
+        'active' => 'register',
+        'tittle' => 'Registrasi Akun'
         ]);
     }
 
@@ -30,6 +31,6 @@ class RegisterController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);       
         User::create($validatedData);
 
-        return redirect('/login')->with('success','Regristasi sukses! Silahkan Login');
+        return redirect('/barang')->with('success','Regristasi sukses!');
     }
 }

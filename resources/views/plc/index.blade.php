@@ -24,7 +24,7 @@
 <div class="row mt-2 mb-3">
     <div class="float-left">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-      Tambah PLC
+        <i class="bi bi-clipboard2-plus"></i> Tambah PLC
       </button>
     </div>
 </div>
@@ -87,7 +87,7 @@
     </div>
     @endif
 
-    <table class="table table-bordered">
+    {{-- <table class="table table-bordered">
         <tr>
             <th width="20px" class="text-center">No</th>
             <th>Nama PLC</th>
@@ -106,7 +106,7 @@
             <td>{{ $plc->address }}</td>
             <td>{{ $plc->type }}</td>
             <td>{{ $plc->location }}</td>
-            <td>{{ $plc->updated_at }}</td>
+            <td>{{ $plc->updated_at ? $plc->updated_at->format('d-m-Y') : 'Tanggal tidak tersedia'}}</td>
             <td class="text-center">
                 <form action="{{ route('plcs.destroy',$plc->id) }}" method="POST">
 
@@ -125,6 +125,182 @@
         @endforeach
     </table>
 
-    {!! $plcs->links() !!}
+    {!! $plcs->links() !!} --}}
+
+    <table id="reportPlcTable" class="table">
+      <thead class="thead-dark">
+          <tr>
+              <th>No</th>
+              <th>Nama PLC</th>
+              <th>Variable PLC</th>
+              <th>Address</th>
+              <th>Type</th>
+              <th>Location</th>
+              <th>Di Update</th>
+              <th>Action</th>
+           
+          </tr>
+      </thead>
+  </table>
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">Edit Report Barang</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form id="editForm">
+                  @csrf
+                  @method('PUT')
+                  <input type="hidden" id="plcId" name="id">
+                  <div class="form-group">
+                      <label for="nama_barang">Nama Plc</label>
+                      <input type="text" class="form-control" id="nama_plc" name="nama_plc">
+                  </div>
+                  <div class="form-group">
+                      <label for="jenis_barang">Var PLC</label>
+                      <input type="text" class="form-control" id="var_plc" name="var_plc">
+                  </div>
+                  <div class="form-group">
+                      <label for="stok">Address</label>
+                      <input type="text" class="form-control" id="address" name="address">
+                  </div>
+                  <div class="form-group">
+                    <label for="stok">Type</label>
+                    <input type="text" class="form-control" id="type" name="type">
+                  </div>
+                  <div class="form-group">
+                    <label for="stok">Location</label>
+                    <input type="text" class="form-control" id="location" name="location">
+                </div>
+
+
+                  <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+      // Mengatur token CSRF di header permintaan AJAX
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      var table = $('#reportPlcTable').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: '{{ route('plc.data') }}',
+          columns: [
+              { 
+                  data: null, 
+                  name: 'no', 
+                  orderable: false, 
+                  searchable: false, 
+                  render: function (data, type, row, meta) {
+                      return meta.row + meta.settings._iDisplayStart + 1;
+                  } 
+              },
+              { data: 'nama_plc', name: 'nama_plc' },
+              { data: 'var_plc', name: 'var_plc' },
+              { data: 'address', name: 'address' },
+              { data: 'type', name: 'type' },
+              { data: 'location', name: 'location' },
+              { data: 'updated_at', name: 'updated_at' },
+              { data: 'action', name: 'action', orderable: false, searchable: false }
+          ]
+      });
+
+      // Handle edit button click
+      $('#reportPlcTable').on('click', '.edit', function() {
+          var id = $(this).data('id');
+          $.get('{{ url('plcs') }}/' + id, function(data) {
+                  $('#plcId').val(data.id);
+                  $('#nama_plc').val(data.nama_plc);
+                  $('#var_plc').val(data.var_plc);
+                  $('#address').val(data.address);
+                  $('#type').val(data.type);
+                  $('#location').val(data.location);
+                  $('#editModal').modal('show'); // Tampilkan modal
+          }).fail(function() {
+              alert("Failed to fetch data.");
+          });
+      });
+
+      // Handle form submit for updating record
+      $('#editForm').on('submit', function(e) {
+          e.preventDefault();
+
+          var id = $('#plcId').val();
+          $.ajax({
+              url: '{{ url('plcs') }}/' + id,
+              type: 'PUT',
+              data: $(this).serialize(),
+              success: function(result) {
+                  $('#editModal').modal('hide');
+                  table.ajax.reload();
+                  Swal.fire(
+                      'Updated!',
+                      'Record updated successfully.',
+                      'success'
+                  );
+              },
+              error: function(xhr) {
+                  Swal.fire(
+                      'Error!',
+                      'There was an error updating the record.',
+                      'error'
+                  );
+              }
+          });
+      });
+
+      // Handle delete button click
+      $('#reportPlcTable').on('click', '.delete', function() {
+          var id = $(this).data('id');
+          Swal.fire({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  $.ajax({
+                      url: '{{ url('plc/delete') }}/' + id,
+                      type: 'DELETE',
+                      success: function(result) {
+                          table.ajax.reload();
+                          Swal.fire(
+                              'Deleted!',
+                              'Record has been deleted.',
+                              'success'
+                          );
+                      },
+                      error: function(xhr) {
+                          Swal.fire(
+                              'Error!',
+                              'There was an error deleting the record.',
+                              'error'
+                          );
+                      }
+                  });
+              }
+          });
+      });
+  });
+</script>
 
 @endsection

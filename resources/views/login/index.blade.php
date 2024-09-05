@@ -99,6 +99,7 @@
                   <div class="d-grid my-3">
                     <button class="btn btn-primary btn-lg" type="submit">{{ __('Login') }}</button>
                   </div>
+                  <a href="/" class="btn btn-danger" role="button" >Kembali</a>
                 </div>
                 <div class="col-12">
                   {{-- <p class="m-0 text-secondary text-center">Don't have an account? <a href="/register" class="link-primary text-decoration-none">Register</a></p> --}}

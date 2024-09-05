@@ -204,14 +204,18 @@
               <div class="col-12">
                 <div class="d-grid my-2">
                   <button class="btn btn-primary mb-2">Register</button>
+
+                  <a href="/barang" class="btn btn-danger" role="button" >Kembali</a>
                   <div class="col-12 mb-2">
-                    <p class="m-0 text-secondary text-center">Have an account? <a href="/login" class="link-primary text-decoration-none">Login</a></p>
+                   
                   </div>
+                  
                 </div>
               </div>  
               </div>
               
             </form>
+            
           </div>
       </div>
     </div>  

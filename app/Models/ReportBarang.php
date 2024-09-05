@@ -10,6 +10,13 @@ class ReportBarang extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'barang_id', 'nama_pengambil', 'keperluan', 'jumlah'
+    ];
+
+    
+    public $timestamps = true;
+
     public function barang()
     {
         return $this->belongsTo(Barang::class, 'barang_id', 'id');

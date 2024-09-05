@@ -8,14 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SB Admin 2 - Dashboard</title>
+
+    <title>{{ $tittle }}</title>
 
     <!-- Custom fonts for this template-->
     <link href="sbadmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     
-    
-        
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <!-- Custom styles for this template-->
     <link href="sbadmin/css/sb-admin-2.min.css" rel="stylesheet">
@@ -53,11 +63,11 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            {{-- <li class="nav-item active">
                 <a class="nav-link" href="">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
-            </li>
+            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -86,7 +96,7 @@
 
             <!-- Heading -->
             <li class="nav-item active">
-                <a class="nav-link" href="/reports">
+                <a class="nav-link" href="/register">
                     <i class="bi bi-person-add"></i>
                     <span>Registrasi Akun</span></a>
               </li>
@@ -810,6 +820,12 @@
     <script src="sbadmin/js/demo/chart-area-demo.js"></script>
     <script src="sbadmin/js/demo/chart-pie-demo.js"></script>
 
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    
 </body>
 
 </html>
