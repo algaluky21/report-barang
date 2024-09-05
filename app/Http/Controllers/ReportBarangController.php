@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\ReportBarang;
 use App\Models\Barang;
+use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables; 
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class ReportBarangController extends Controller
 {
@@ -19,17 +23,28 @@ class ReportBarangController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
        
         $report_barangs = ReportBarang::latest()->paginate(5);
         $barangs = Barang::all();
         
+=======
+
+        $report_barangs = ReportBarang::latest()->paginate(5);
+        $barangs = Barang::get();
+
+>>>>>>> 63f5ac4bef736d59166393f9076eb0e0cc5ee1a1
         return view('report.index',[
         'tittle' => 'Laporan Barang',
         'return' =>'Post',
         'active' => 'post'
+<<<<<<< HEAD
         ],compact('report_barangs','barangs'))->with('i', (request()->input('page', 1) - 1) * 5);
+=======
+        ],compact('report_barangs', 'barangs'))->with('i', (request()->input('page', 1) - 1) * 5);
 
-       
+>>>>>>> 63f5ac4bef736d59166393f9076eb0e0cc5ee1a1
+
     }
 
     public function getData()
@@ -91,9 +106,14 @@ class ReportBarangController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         
+=======
+>>>>>>> 63f5ac4bef736d59166393f9076eb0e0cc5ee1a1
 
-        
+       return view('report.index', compact('barangs'));
+
+
     }
 
     /**
@@ -118,6 +138,7 @@ class ReportBarangController extends Controller
 
         // Validasi input
         $request->validate([
+<<<<<<< HEAD
             'barang_id' => 'required|exists:barangs,id',
             'nama_pengambil' => 'required|string|max:255',
             'keperluan' => 'required|string|max:255',
@@ -126,6 +147,33 @@ class ReportBarangController extends Controller
 
         // Ambil data barang terkait
         $barang = Barang::findOrFail($request->barang_id);
+=======
+            'barang_id'      => 'required',
+            'nama_pengambil' => 'required',
+            'keperluan'      => 'required',
+            'jumlah'         => 'required',
+        ]);
+
+        try {
+            DB::transaction(function () use ($request) {
+                $barang = Barang::find($request?->barang_id);
+                if($barang && (int)$barang?->stok - (int)$request?->jumlah >= 0){
+                    $barang?->update([
+                        'stok' => $barang?->stok - (int)$request?->jumlah
+                    ]);
+
+                    $barang?->reportBarangs()->create([
+                        'nama_pengambil' => $request?->nama_pengambil,
+                        'keperluan'      => $request?->keperluan,
+                        'jumlah'         => $request?->jumlah,
+                    ]);
+                }
+            });
+        } catch (Exception | Throwable $th) {
+            DB::rollBack();
+            Log::error($th->getMessage());
+        }
+>>>>>>> 63f5ac4bef736d59166393f9076eb0e0cc5ee1a1
 
         // Kurangi stok barang
         if ($barang->stok < $request->jumlah) {

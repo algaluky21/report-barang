@@ -13,6 +13,7 @@
       </button>
     </div>
 </div>
+<<<<<<< HEAD
 
     
     <!-- Modal -->
@@ -67,10 +68,13 @@
         </div>
       </div>
     </div>
+=======
+@include('report.create')
 
-    
+>>>>>>> 63f5ac4bef736d59166393f9076eb0e0cc5ee1a1
+
     <!-- Modal -->
-    
+
 
     {{-- <div class="row justify-content-center">
         <div class="col-md-6">
@@ -83,7 +87,7 @@
         </div>
     </div> --}}
 
-    
+
 
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
@@ -108,8 +112,25 @@
             <td>{{ $rpt?->barang?->nama_barang }}</td>
             <td>{{ $rpt?->keperluan }}</td>
             <td>{{ $rpt?->jumlah }}</td>
+<<<<<<< HEAD
             <td>{{ $rpt?->created_at ? $rpt->created_at->format('d-m-Y') : 'Tanggal tidak tersedia'}}</td>
        
+=======
+            <td>{{ $rpt?->created_at }}</td>
+            <td class="text-center">
+                <form action="{{ route('barang.destroy',$rpt->id) }}" method="POST">
+{{--
+                    <a class="btn btn-info btn-sm" href="{{ route('report.show') }}">Show</a>  --}}
+
+                    <a class="btn btn-primary btn-sm" href="{{ route('barang.edit',$rpt->id) }}">Edit</a>
+
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="bi bi-trash"></i></button>
+                </form>
+            </td>
+>>>>>>> 63f5ac4bef736d59166393f9076eb0e0cc5ee1a1
         </tr>
         @endforeach
     </table>
